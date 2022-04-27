@@ -18,3 +18,48 @@ class Project(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.RESTRICT
     )
+
+
+class Issue(models.Model):
+    TAG = [
+        ('BUG', 'Bug'),
+        ('ENHANCEMENT', 'Amélioration'),
+        ('TASK', 'Tâche'),
+    ]
+
+    PRIORITY = [
+        ('HIGH', 'Élevée'),
+        ('NORMAL', 'Normal'),
+        ('LOW', 'Faible'),
+    ]
+
+    STATUS = [
+        ('TO_DO', 'À faire'),
+        ('IN_PROGRES', 'En cours'),
+        ('DONE', 'Terminé'),
+    ]
+
+    title = models.CharField(max_length=128)
+    description = models.TextField(max_length=2048)
+    tag = models.CharField(max_length=12, choices=TAG)
+    priority = models.CharField(max_length=12, choices=PRIORITY)
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE
+    )
+    status = models.CharField(max_length=12, choices=STATUS)
+    assignee_user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.RESTRICT
+    )
+    created_time = models.DateTimeField(auto_now_add=True)
+
+
+class Comment(models.Model):
+    description = models.TextField(max_length=2048)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.RESTRICT
+    )
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
+    created_time = models.DateTimeField(auto_now_add=True)

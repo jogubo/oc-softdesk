@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from issue_tracking_system.models import Project 
 
 
 class UserManager(BaseUserManager):
@@ -42,3 +43,14 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+class Contributor(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE
+    )
