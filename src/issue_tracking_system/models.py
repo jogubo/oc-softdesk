@@ -19,6 +19,9 @@ class Project(models.Model):
         on_delete=models.RESTRICT
     )
 
+    def __str__(self):
+        return f'{self.title}'
+
 
 class Issue(models.Model):
     TAG = [
@@ -53,6 +56,9 @@ class Issue(models.Model):
         on_delete=models.RESTRICT
     )
     created_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.title}'
 
 
 class Comment(models.Model):
