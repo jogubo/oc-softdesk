@@ -1,6 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Project
+from .serializers import ProjectSerializer
+
 
 class ProjectViewSet(ModelViewSet):
 

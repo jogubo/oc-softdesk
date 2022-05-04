@@ -32,12 +32,14 @@ class Issue(models.Model):
         on_delete=models.CASCADE
     )
     status = models.CharField(max_length=12, choices=STATUS)
-    # author = models.ForeignKey(
-    #     settings.AUTH_USER_MODEL,
-    #     on_delete=models.RESTRICT
-    # )
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='create_issue'
+    )
     assignee_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.RESTRICT
+        on_delete=models.RESTRICT,
+        related_name='assigned_issue'
     )
     created_time = models.DateTimeField(auto_now_add=True)
