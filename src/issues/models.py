@@ -1,26 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-
-class Project(models.Model):
-
-    PROJECT_TYPES = [
-        ('BE', 'Back-end'),
-        ('FE', 'Front-end'),
-        ('IOS', 'iOS'),
-        ('ANDROID', 'Android'),
-    ]
-
-    title = models.CharField(max_length=128)
-    description = models.TextField(max_length=2048)
-    type = models.CharField(max_length=128, choices=PROJECT_TYPES)
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.RESTRICT
-    )
-
-    def __str__(self):
-        return f'{self.title}'
+from projects.models import Project
 
 
 class Issue(models.Model):
@@ -51,21 +32,12 @@ class Issue(models.Model):
         on_delete=models.CASCADE
     )
     status = models.CharField(max_length=12, choices=STATUS)
+    # author = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.RESTRICT
+    # )
     assignee_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.RESTRICT
     )
-    created_time = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'{self.title}'
-
-
-class Comment(models.Model):
-    description = models.TextField(max_length=2048)
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.RESTRICT
-    )
-    issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     created_time = models.DateTimeField(auto_now_add=True)

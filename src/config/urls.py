@@ -17,17 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from issue_tracking_system.views import ProjectViewSet
-from issue_tracking_system.views import IssueViewSet
-from issue_tracking_system.views import CommentViewSet
+# from issue_tracking_system.views import ProjectViewSet
+# from issue_tracking_system.views import IssueViewSet
+# from issue_tracking_system.views import CommentViewSet
 
-router = routers.SimpleRouter()
-router.register('projects', ProjectViewSet, basename='projects')
-router.register('issues', IssueViewSet, basename='issues')
-router.register('comments', CommentViewSet, basename='comments')
+# router = routers.SimpleRouter()
+# router.register('projects', ProjectViewSet, basename='projects')
+# router.register('issues', IssueViewSet, basename='issues')
+# router.register('comments', CommentViewSet, basename='comments')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/', include(router.urls)),
+    # path('api/', include(router.urls)),
 ]

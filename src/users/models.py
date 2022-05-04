@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
-from issue_tracking_system.models import Project 
 
 
 class UserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **other_fields):
         if not email:
-            raise ValueError('Users must have an email address')
+            raise ValueError('User must have an email address')
 
         user = self.model(email=self.normalize_email(email))
         user.set_password(password)
@@ -43,14 +42,3 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-
-
-class Contributor(models.Model):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE
-    )
-    project = models.ForeignKey(
-        Project,
-        on_delete=models.CASCADE
-    )
