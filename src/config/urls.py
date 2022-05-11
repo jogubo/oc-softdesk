@@ -23,10 +23,34 @@ from projects.views import ProjectViewSet
 from issues.views import IssueViewSet
 from comments.views import CommentViewSet
 
-router = routers.SimpleRouter()
-router.register('projects', ProjectViewSet, basename='projects')
-router.register('issues', IssueViewSet, basename='issues')
-router.register('comments', CommentViewSet, basename='comments')
+router = routers.DefaultRouter()
+
+# # Generate:
+# /projects/
+# /projects/{project_id}
+router.register(
+    'projects',
+    ProjectViewSet,
+    basename='projects'
+)
+
+# # Generate:
+# /projects/{project_id}/issues/
+# /projects/{project_id}/issues/{issue_id}/
+router.register(
+    r'projects/(?P<project_id>[^/.]+)/issues',
+    IssueViewSet,
+    basename='issues'
+)
+
+# # Generate:
+# /projects/{project_id}/issues/{issue_id}/comments/
+# /projects/{project_id}/issues/{issue_id}/comments/{comment_id}
+router.register(
+    r'projects/(?P<project_id>[^/.]+)/issues/(?P<issue_id>[^/.]+)/comments',
+    CommentViewSet,
+    basename='comments'
+)
 
 urlpatterns = [
     path(

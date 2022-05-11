@@ -16,7 +16,8 @@ class Project(models.Model):
     type = models.CharField(max_length=128, choices=PROJECT_TYPES)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.RESTRICT
+        on_delete=models.RESTRICT,
+        related_name='project_created_by'
     )
 
     def __str__(self):

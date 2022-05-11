@@ -1,12 +1,21 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
 
-from .models import Issue
+from projects.models import Project
 from .serializers import IssueSerializer
 
 
 class IssueViewSet(ModelViewSet):
 
     serializer_class = IssueSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Issue.objects.all()
+
+        object = Project.objects.get(
+            Q(pk=self.kwargs['project_id']),
+            Q(author=self.request.user)
+            | Q(project_contributor__user=self.request.user)
+        )
+        return object.issue_related.all()
