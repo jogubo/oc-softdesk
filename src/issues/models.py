@@ -41,6 +41,11 @@ class Issue(models.Model):
     assignee_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
         related_name='issue_assigned_to'
     )
     created_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.title}'
