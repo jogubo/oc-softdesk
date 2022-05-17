@@ -12,10 +12,9 @@ class IssueViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-
-        object = Project.objects.get(
+        queryset = Project.objects.get(
             Q(pk=self.kwargs['project_id']),
             Q(author=self.request.user)
             | Q(project_contributor__user=self.request.user)
         )
-        return object.issue_related.all()
+        return queryset.issue_related.all()

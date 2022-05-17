@@ -23,7 +23,7 @@ from projects.views import ProjectViewSet
 from issues.views import IssueViewSet
 from comments.views import CommentViewSet
 
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=True)
 
 # # Generate:
 # /projects/
@@ -31,7 +31,7 @@ router = routers.DefaultRouter()
 router.register(
     'projects',
     ProjectViewSet,
-    basename='projects'
+    basename='projects',
 )
 
 # # Generate:
