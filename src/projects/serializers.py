@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, ListField
+from rest_framework.serializers import ModelSerializer
 
 from .models import Project
 from contributors.serializers import ContributorSerializer
