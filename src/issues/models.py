@@ -30,20 +30,20 @@ class Issue(models.Model):
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
-        related_name='issue_related'
+        related_name='issues'
     )
     status = models.CharField(max_length=12, choices=STATUS)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='issue_created_by'
+        related_name='issue_created'
     )
     assignee_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.RESTRICT,
         null=True,
         blank=True,
-        related_name='issue_assigned_to'
+        related_name='issue_assigned'
     )
     created_time = models.DateTimeField(auto_now_add=True)
 

@@ -17,6 +17,6 @@ class ProjectViewSet(ModelViewSet):
         contributor = Contributor.objects.filter(user=self.request.user)
         queryset = Project.objects.filter(
             Q(author=self.request.user)
-            | Q(project_contributor__in=contributor)
+            | Q(contributors__in=contributor)
         )
-        return queryset
+        return queryset.distinct()

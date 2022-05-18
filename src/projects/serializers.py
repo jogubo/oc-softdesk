@@ -1,22 +1,22 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, ListField
 
 from .models import Project
+from contributors.serializers import ContributorSerializer
 
 
 class ProjectSerializer(ModelSerializer):
+    contributors = ContributorSerializer(many=True)
 
     class Meta:
-
         model = Project
-
         fields = [
             'id',
             'title',
             'description',
             'type',
             'author',
+            'contributors',
         ]
-
         read_only_fields = ('author',)
 
     def create(self, validated_data):

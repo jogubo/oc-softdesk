@@ -17,7 +17,7 @@ class Project(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.RESTRICT,
-        related_name='project_created_by'
+        related_name='projects'
     )
 
     def __str__(self):
