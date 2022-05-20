@@ -1,11 +1,11 @@
 from rest_framework.serializers import ModelSerializer
 
 from .models import Project
-from contributors.serializers import ContributorSerializer
+# from contributors.serializers import ContributorSerializer
 
 
 class ProjectSerializer(ModelSerializer):
-    contributors = ContributorSerializer(many=True)
+    # contributors = ContributorSerializer(many=True)
 
     class Meta:
         model = Project
@@ -17,7 +17,7 @@ class ProjectSerializer(ModelSerializer):
             'author',
             'contributors',
         ]
-        read_only_fields = ('author',)
+        read_only_fields = ('author', 'contributors')
 
     def create(self, validated_data):
         author = self.context.get('request', None).user
