@@ -22,3 +22,15 @@ class Project(models.Model):
 
     def __str__(self):
         return f'{self.title}'
+
+    def is_owner(self, user):
+        if user == self.author:
+            return True
+        else:
+            return False
+
+    def is_contributor(self, user):
+        if user in self.contributors.all():
+            return True
+        else:
+            return False

@@ -16,3 +16,4 @@ class CommentSerializer(ModelSerializer):
             'issue',
             'created_time',
         ]
+        read_only_fields = ('author', 'issue', 'created_time')

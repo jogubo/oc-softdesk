@@ -37,6 +37,19 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
+    def is_author(self, object):
+        if self == object.author:
+            return True
+        else:
+            return False
+
+    def is_contributor(self, project):
+        for contributor in project.contributors.all():
+            if self == contributor.user:
+                return True
+            else:
+                return False
+
     def has_perm(self, perm, obj=None):
         return True
 
