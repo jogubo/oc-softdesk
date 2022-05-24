@@ -4,12 +4,18 @@ from django.db.models import Q
 
 from .serializers import CommentSerializer
 from issues.models import Issue
+from .permissions import IsAuthorOrReadOnly
+from projects.permissions import HasProjectPermission
 
 
 class CommentViewSet(ModelViewSet):
 
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = (
+        IsAuthenticated,
+        HasProjectPermission,
+        IsAuthorOrReadOnly
+    )
 
     def get_queryset(self):
         queryset = Issue.objects.get(

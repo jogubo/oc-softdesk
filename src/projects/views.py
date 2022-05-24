@@ -1,11 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from config.permissions import IsProjectOwner, IsProjectContributor
 from django.db.models import Q
 
 from .models import Project
 from .serializers import ProjectSerializer
 from contributors.models import Contributor
+from .permissions import IsProjectOwner, IsProjectContributor
 
 
 class ProjectViewSet(ModelViewSet):

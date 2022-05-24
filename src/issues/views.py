@@ -1,9 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from config.permissions import HasProjectPermission, IsAuthorOrReadOnly
 
 from projects.models import Project
 from .serializers import IssueSerializer
+from .permissions import IsAuthorOrReadOnly
+from projects.permissions import HasProjectPermission
 
 
 class IssueViewSet(ModelViewSet):
@@ -11,7 +12,8 @@ class IssueViewSet(ModelViewSet):
     serializer_class = IssueSerializer
     permission_classes = (
         IsAuthenticated,
-        HasProjectPermission | IsAuthorOrReadOnly
+        HasProjectPermission,
+        IsAuthorOrReadOnly
     )
 
     def get_queryset(self):
