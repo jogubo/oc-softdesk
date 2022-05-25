@@ -8,7 +8,7 @@ class IsAuthorOrReadOnly(BasePermission):
 
     def has_permission(self, request, view):
 
-        allowed_actions = ['list', 'retrieve']
+        allowed_actions = ['create', 'list', 'retrieve']
         if view.action in allowed_actions:
             return True
 
