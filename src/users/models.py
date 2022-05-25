@@ -47,8 +47,7 @@ class User(AbstractBaseUser):
         for contributor in project.contributors.all():
             if self == contributor.user:
                 return True
-            else:
-                return False
+        return False
 
     def has_perm(self, perm, obj=None):
         return True
