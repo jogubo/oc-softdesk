@@ -13,7 +13,12 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-Puis lancer le serveur django
+Installer les dépendances
+```shell
+pip install -r requierements.txt
+```
+
+Lancer le serveur django
 ```shell
 python src/manage.py runserver
 ```
@@ -41,12 +46,6 @@ Pour supprimer l'image docker, utilisez la commande
 ```shell
 docker-compose down
 ```
-
-
-## Accéder au site en local
-
-Quand le serveur et lancé, le site est accessible en local sur le port par défaut de django:
-http://127.0.0.1:8000/
 
 
 ## Interface d'administration
